@@ -14,7 +14,7 @@ function UpdateStudent(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`/students/${id}`);
+        const response = await axios.get(`students/${id}`);
         const { first_name, last_name, gpa, enrolled } = response.data;
         setFirstName(first_name);
         setLastName(last_name);

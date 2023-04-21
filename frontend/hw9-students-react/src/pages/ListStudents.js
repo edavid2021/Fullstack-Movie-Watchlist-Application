@@ -6,12 +6,11 @@ import Table from 'react-bootstrap/Table';
 function ListStudents() {
   const [students, setStudents] = useState([]);
   const location = useLocation();
-  //this is edited
+
   useEffect(() => {
     axios.get(`/students${location.search}`)
       .then(response => {
         setStudents(response.data.students);
-        console.log("this got edited")
       })
       .catch(error => {
         console.log('Error: ' + error);

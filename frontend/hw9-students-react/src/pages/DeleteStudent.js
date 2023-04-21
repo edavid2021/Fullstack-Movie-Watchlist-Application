@@ -17,7 +17,7 @@ function DeleteStudent() {
       .catch(error => {
         console.log('Error: ' + error);
       });
-  },[id]);
+  },[id, student]);
   const handleDelete = async (event) => {
     event.preventDefault();
   
