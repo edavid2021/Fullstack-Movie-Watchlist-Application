@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10551079&assignment_repo_type=AssignmentRepo)",
+  "main": "studentserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node studentserver.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://giacobn: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@github.com/cop4808-spring-2023-fullstack-web/hw7-ejs-mongodb-giacobn.git"
+  },
+  "author": "nick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cop4808-spring-2023-fullstack-web/hw7-ejs-mongodb-giacobn/issues"
+  },
+  "homepage": "https://github.com/cop4808-spring-2023-fullstack-web/hw7-ejs-mongodb-giacobn#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "glob": "^8.1.0",
+    "mongodb": "^5.1.0",
+    "path": "^0.12.7"
+  },
+  "keywords": [
+    "backend"
+  ]
+}
