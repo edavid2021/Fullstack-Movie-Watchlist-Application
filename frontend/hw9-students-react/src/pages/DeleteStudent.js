@@ -8,7 +8,7 @@ function DeleteStudent() {
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get(`/students/${id}`)
+    axios.get(`http://localhost:5678/students/${id}`)
       .then(response => {
         console.log(response.data);
         setStudent(response.data);
@@ -22,7 +22,7 @@ function DeleteStudent() {
     event.preventDefault();
   
     try {
-      await axios.delete(`/students/${id}`);
+      await axios.delete(`http://localhost:5678/students/${id}`);
       console.log('Student record deleted successfully');
       // Show confirmation message
       alert('Student record deleted successfully');

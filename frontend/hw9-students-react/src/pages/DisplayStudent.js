@@ -8,7 +8,7 @@ function DisplayStudent() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`/students/${id}`)
+    axios.get(`http://localhost:5678/students/${id}`)
       .then(response => {
         console.log(response.data);
         setStudent(response.data);

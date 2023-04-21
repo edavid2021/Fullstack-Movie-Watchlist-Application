@@ -14,7 +14,7 @@ function AddStudent() {
     event.preventDefault();
 
     try {
-      await axios.post('/students', {
+      await axios.post('http://localhost:5678/students', {
         first_name: firstName,
         last_name: lastName,
         gpa: gpa,

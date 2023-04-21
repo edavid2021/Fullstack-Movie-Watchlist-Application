@@ -8,7 +8,7 @@ function ListStudents() {
   const location = useLocation();
 
   useEffect(() => {
-    axios.get(`/students${location.search}`)
+    axios.get(`http://localhost:5678/students${location.search}`)
       .then(response => {
         setStudents(response.data.students);
       })
@@ -23,10 +23,6 @@ function ListStudents() {
   };
 
   const renderTableRows = () => {
-    if (!students || students.length === 0) {
-      return null;
-    }
-  
     return students.map(student => (
       <tr key={student.record_id} onClick={() => handleRowClick(student.record_id)}>
         <td><Link to={`/displayStudent/${student.record_id}`}>{student.record_id}</Link></td>
@@ -37,7 +33,6 @@ function ListStudents() {
       </tr>
     ));
   };
-  
 
   return (
     <Table striped>

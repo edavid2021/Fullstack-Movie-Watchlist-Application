@@ -2,8 +2,8 @@
 // Importing the required modules
 const express = require('express')
 const app = express()
-const path = require('path');
 const bodyParser = require('body-parser');
+const res = require('express/lib/response')
 // Connection URI for MongoDB
 const MongoClient = require('mongodb').MongoClient;
 var config = require('./config');
@@ -11,21 +11,14 @@ const uri = 'mongodb+srv://admin:admin@studentdb.4dvz4nf.mongodb.net/?retryWrite
 // Configuring the server
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'build')));
-
-
+app.use(express.static('./public'));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-/*app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});*/
+
 
 // GET requests to render HTML pages
 /*
@@ -208,9 +201,7 @@ app.delete('/students/:record_id', async function(req, res) {
   }
 });
  //end delete method
- app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+
 app.listen(5678); //start the server
 console.log('Server is running...');
 
