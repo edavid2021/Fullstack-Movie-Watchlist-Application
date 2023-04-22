@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
 
-function AddStudent() {
+function Latest() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gpa, setGpa] = useState('');
@@ -53,4 +53,4 @@ function AddStudent() {
     </div>
   );
 }
-export default AddStudent
+export default Latest;

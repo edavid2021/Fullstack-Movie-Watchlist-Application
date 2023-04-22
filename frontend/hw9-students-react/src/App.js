@@ -7,11 +7,12 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Home from './pages/Home';
-import ListStudents from './pages/ListStudents';
-import DisplayStudent from './pages/DisplayStudent';
-import AddStudent from './pages/AddStudent';
-import UpdateStudent from './pages/UpdateStudent';
-import DeleteStudent from './pages/DeleteStudent';
+import Recommended from './pages/Recommended';
+import SearchResults from './pages/SearchResults';
+import Latest from './pages/Latest';
+import LoginRegister from './pages/LoginRegister';
+import Watchlist from './pages/Watchlist';
+import MovieDetails from './pages/MovieDetails';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,29 +26,33 @@ function App() {
     <BrowserRouter>
       <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
         <Container>
-          <Navbar.Brand href="#home">Students</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/"> Anime Movie Watchlist</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">
+            <Nav className="me-auto mx-auto">
+              <Nav.Link as={Link} to="/" className="ps-4">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/ListStudents">
-                Students
+              <Nav.Link as={Link} to="/Latest" className="ps-4">
+                Latest
               </Nav.Link>
-              <Nav.Link as={Link} to="/addStudent">
-                Add Student
+              <Nav.Link as={Link} to="/Watchlist" className="ps-4">
+                Watchlist
+              </Nav.Link>
+              <Nav.Link as={Link} to="/LoginRegister" className="ps-4">
+                Login/Register
               </Nav.Link>
             </Nav>
-            <Form className="d-flex" >
+            <Form className="d-flex justify-content-around" >
               <Form.Control
                 type="search"
-                placeholder="Enter Last Name"
-                className="me-2"
+                placeholder="Search for a Movie"
+                className="me-2 ps-2"
                 value={searchQuery} 
                 onChange={(e) => setSearchQuery(e.target.value)}
+                // style={{ width: "70%" }} // Set the width here
               />
-              <Link to={`/ListStudents/?lastName=${searchQuery}`}>
+              <Link to={`/SearchResults/?Film=${searchQuery}`}>
                 <Button variant="outline-success" onClick={handleSearch}>Search</Button>
               </Link>
             </Form>
@@ -57,12 +62,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/ListStudents" element={<ListStudents />} />
-        <Route path="/displayStudent/:id" element={<DisplayStudent />} />
-        <Route path="/addStudent/" element={<AddStudent />} />
-        <Route path="/updateStudent/:id" element={<UpdateStudent />} />
-        <Route path="/deleteStudent/:id" element={<DeleteStudent />} />
-        <Route path="/ListStudents/:searchQuery?" element={<ListStudents />} />
+        <Route path="/Latest" element={<Latest />} />
+        <Route path="/LoginRegister" element={<LoginRegister />} />
+        <Route path="/Recommended/" element={<Recommended />} />
+        <Route path="/Watchlist" element={<Watchlist />} />
+        <Route path="/MovieDetails" element={<MovieDetails />} />
+        <Route path="/SearchResults/:searchQuery?" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>
   );
