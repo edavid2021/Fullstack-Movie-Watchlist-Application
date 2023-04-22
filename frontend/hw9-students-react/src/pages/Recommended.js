@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 
-function ListStudents() {
+function Recommended() {
   const [students, setStudents] = useState([]);
   const location = useLocation();
 
@@ -52,4 +52,4 @@ function ListStudents() {
   );
 }
 
-export default ListStudents;
+export default Recommended;

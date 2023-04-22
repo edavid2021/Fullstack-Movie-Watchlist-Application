@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function UpdateStudent(props) {
+function LoginRegister(props) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gpa, setGpa] = useState('');
@@ -74,4 +74,4 @@ function UpdateStudent(props) {
   );
 }
 
-export default UpdateStudent;
+export default LoginRegister;
