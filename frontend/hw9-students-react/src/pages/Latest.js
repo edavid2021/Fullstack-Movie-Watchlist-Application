@@ -5,52 +5,109 @@ import Form from 'react-bootstrap/Form';
 import {useNavigate} from 'react-router-dom';
 
 function Latest() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [gpa, setGpa] = useState('');
-  const [enrolled, setEnrolled] = useState(false);
-  const navigate = useNavigate();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      await axios.post('http://localhost:5678/students', {
-        first_name: firstName,
-        last_name: lastName,
-        gpa: gpa,
-        enrolled: enrolled.toString()
-      });
-      console.log('Student record added successfully');
-      alert('Student record added successfully');
-      navigate('/listStudents');
-    } catch (err) {
-      console.error('Error adding student record:', err);
-    }
-  };
-
+  
   return (
-    <div className="container-fluid mt-3">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formfirstname">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formlastname">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formgpa">
-          <Form.Label>GPA</Form.Label>
-          <Form.Control type="number" min="0" max="4" step=".01" value={gpa} onChange={(e) => setGpa(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formenrolled">
-          <Form.Check type="checkbox" label="Enrolled" checked={enrolled} onChange={(e) => setEnrolled(e.target.checked)} />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-    </div>
+    <>
+      <section className="section p-3 bg-light border-bottom border-2 border-dark" >
+                <div className="container d-flex justify-content-between align-items-center">
+                    <h3 className="text-center">Latest</h3>
+                
+                <div className="justify-content-md-end">
+                    <button className="btn btn-outline-dark me-2">1</button>
+                    <button className="btn btn-outline-dark me-2">2</button>
+                    <button className="btn btn-outline-dark">3</button>
+                </div>
+                </div> 
+            </section>
+            <section className="section p-3 bg-light">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                        </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 pt-4">
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                        </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+    </>
   );
 }
 export default Latest;

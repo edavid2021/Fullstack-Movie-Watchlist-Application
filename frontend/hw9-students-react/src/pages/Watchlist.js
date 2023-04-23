@@ -4,50 +4,110 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 function Watchlist() {
-  const [student, setStudent] = useState({});
-  const { id } = useParams();
-  const navigate = useNavigate();
-  useEffect(() => {
-    axios.get(`http://localhost:5678/students/${id}`)
-      .then(response => {
-        console.log(response.data);
-        setStudent(response.data);
-        console.log(student);
-      })
-      .catch(error => {
-        console.log('Error: ' + error);
-      });
-  },[id, student]);
-  const handleDelete = async (event) => {
-    event.preventDefault();
   
-    try {
-      await axios.delete(`http://localhost:5678/students/${id}`);
-      console.log('Student record deleted successfully');
-      // Show confirmation message
-      alert('Student record deleted successfully');
-      // Redirect back to the previous page
-      navigate('/listStudents');
-
-    } catch (error) {
-      console.error('Error updating student record:', error);
-    }
-  };
 
   return (
     <>
-    <h1>Are you Sure You Want To Delete This Student?</h1>
-    <ListGroup>
-      <ListGroup.Item><h2>Name: {student.first_name} {student.last_name}</h2></ListGroup.Item>
-      <ListGroup.Item>Id: {student.record_id}</ListGroup.Item>
-      <ListGroup.Item>GPA: {student.gpa}</ListGroup.Item>
-      <ListGroup.Item>Enrolled: {student.enrolled}</ListGroup.Item>
-    </ListGroup>
-    <div class="container-fluid mt-3">
-        <Button variant="outline-danger" onClick={handleDelete}>Delete Student</Button>{' '}
-    </div>
+    <section className="section p-3 bg-light border-bottom border-2 border-dark" >
+                <div className="container d-flex justify-content-between align-items-center">
+                    <h3 className="text-center">Watchlist</h3>
+                
+                <div className="justify-content-md-end">
+                    <button className="btn btn-outline-dark me-2">1</button>
+                    <button className="btn btn-outline-dark me-2">2</button>
+                    <button className="btn btn-outline-dark">3</button>
+                </div>
+                </div> 
+            </section>
+            <section className="section p-3 bg-light">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                        </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 pt-4">
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                        </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="..." alt="Card image cap"/>
+                        <div class="card-body">
+                            <h5 class="card-title">Movie title</h5>
+                            <p class="card-text">Movie Description</p>
+                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
     </>
-
   );
 }
 
