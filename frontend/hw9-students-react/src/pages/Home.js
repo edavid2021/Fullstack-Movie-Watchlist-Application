@@ -28,7 +28,10 @@ export default function Home(){
                         <div class="card-body">
                             <h5 class="card-title">Movie title</h5>
                             <p class="card-text">Movie Description</p>
-                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text"><small class="text-muted">Release Date</small></p>
+                                <button class="btn btn-outline-secondary btn-md">Watchlist</button>
+                            </div>
                         </div>
                         </div>
                     </div>
@@ -38,10 +41,13 @@ export default function Home(){
                         <div class="card-body">
                             <h5 class="card-title">Movie title</h5>
                             <p class="card-text">Movie Description</p>
-                            <p class="card-text"><small class="text-muted">Release Date</small></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text"><small class="text-muted">Release Date</small></p>
+                                <button class="btn btn-outline-secondary btn-md">Watchlist</button>
+                            </div>
                         </div>
                         </div>
-                        </div>
+                    </div>
                     <div class="col">
                         <div class="card h-100">
                         <img class="card-img-top" src="..." alt="Card image cap"/>
