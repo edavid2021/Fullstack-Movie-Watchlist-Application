@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
+import '../style/Home.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  var [Watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
     async function fetchMovies(page) {
@@ -19,6 +23,22 @@ export default function Home() {
     fetchMovies(currentPage);
   }, [currentPage]);
 
+
+  function addWatchlist(event) {
+    event.preventDefault();
+    var id = parseInt(event.target.id);
+    setWatchlist([...Watchlist, id]);
+    console.log(Watchlist);
+
+  }
+
+  function deleteWatchlist(event) {
+    event.preventDefault();
+    var id = parseInt(event.target.id);
+    setWatchlist(Watchlist.filter(item => item !== id));
+    console.log(Watchlist);
+  }
+
   function handlePageChange(page) {
     setCurrentPage(page);
   }
@@ -27,7 +47,7 @@ export default function Home() {
     const PAGE_RANGE_DISPLAYED = 5;
     const MARGIN_PAGES_DISPLAYED = 1;
     let pagination = [];
-  
+
     if (totalPages <= PAGE_RANGE_DISPLAYED) {
       for (let i = 1; i <= totalPages; i++) {
         pagination.push(
@@ -43,17 +63,17 @@ export default function Home() {
     } else {
       let leftSide = currentPage - Math.floor(PAGE_RANGE_DISPLAYED / 2);
       let rightSide = currentPage + Math.floor(PAGE_RANGE_DISPLAYED / 2);
-  
+
       if (leftSide < MARGIN_PAGES_DISPLAYED + 1) {
         leftSide = MARGIN_PAGES_DISPLAYED + 1;
         rightSide = PAGE_RANGE_DISPLAYED;
       }
-  
+
       if (rightSide > totalPages - MARGIN_PAGES_DISPLAYED) {
         leftSide = totalPages - PAGE_RANGE_DISPLAYED + 1;
         rightSide = totalPages - MARGIN_PAGES_DISPLAYED;
       }
-  
+
       pagination.push(
         <button
           key={1}
@@ -63,7 +83,7 @@ export default function Home() {
           {1}
         </button>
       );
-  
+
       if (leftSide > MARGIN_PAGES_DISPLAYED + 1) {
         pagination.push(
           <span key="leftEllipsis" className="me-2">
@@ -71,7 +91,7 @@ export default function Home() {
           </span>
         );
       }
-  
+
       for (let i = leftSide; i <= rightSide; i++) {
         pagination.push(
           <button
@@ -83,7 +103,7 @@ export default function Home() {
           </button>
         );
       }
-  
+
       if (rightSide < totalPages - MARGIN_PAGES_DISPLAYED) {
         pagination.push(
           <span key="rightEllipsis" className="me-2">
@@ -91,7 +111,7 @@ export default function Home() {
           </span>
         );
       }
-  
+
       pagination.push(
         <button
           key={totalPages}
@@ -102,10 +122,17 @@ export default function Home() {
         </button>
       );
     }
-  
+
     return <div>{pagination}</div>;
   }
-  
+
+  const [active, setActive] = useState(false);
+  const [btnClassName, setBtnClassName] = useState('btn-outline-secondary');
+
+  const handleClick = () => {
+    setActive(!active);
+    setBtnClassName(active ? 'btn-outline-secondary' : 'btn-outline-success');
+  };
 
   return (
     <>
@@ -132,9 +159,40 @@ export default function Home() {
                   <div className="card-body">
                     <h5 className="card-title">{movie.title}</h5>
                     <p className="card-text">{movie.overview.substring(0, 100)}...</p>
-                    <p className="card-text">
-                      <small className="text-muted">{movie.release_date}</small>
-                    </p>
+                    <div class="cfoot d-flex justify-content-between align-items-center">
+                      <p class="card-text">
+                        <small class="text-muted">
+                          {movie.release_date}
+                        </small>
+                      </p>
+                      {Watchlist.includes(movie.id) ?
+                        <button
+                          id={movie.id}
+                          variant="outline-primary"
+                          size="md"
+                          onClick={deleteWatchlist}
+                          aria-pressed={active}
+                          className={btnClassName}
+                        >
+                          Unadd
+                        </button>
+                        :
+                        <button
+                          id={movie.id}
+                          variant="outline-secondary"
+                          size="md"
+                          onClick={addWatchlist}
+                          aria-pressed={active}
+                          className={btnClassName}
+                        >
+                          Watchlist
+                        </button>
+                      }
+                      {/* <Link to={`/Watchlist`}>
+                        <Button variant="outline-success" onClick={}>Search</Button>
+                        </Link>         */}
+
+                    </div>
                   </div>
                 </div>
               </div>
