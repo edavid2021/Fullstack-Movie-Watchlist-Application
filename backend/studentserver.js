@@ -1,8 +1,9 @@
 ///studentserver.js
 // Importing the required modules
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
+const axios = require('axios');
 const res = require('express/lib/response')
 // Connection URI for MongoDB
 const MongoClient = require('mongodb').MongoClient;
@@ -63,6 +64,28 @@ app.post('/students', async function(req, res) {
     res.status(500).send('Error adding student record');
   }
 });
+//route for getting data from the moviedb api, this is for the trending/home page
+
+app.get('/trending', async (req, res) => {
+  const { page } = req.query;
+
+  try {
+    const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+      params: {
+        api_key: '8634de54298be041f009b7c918664433',
+        sort_by: 'popularity.desc',
+        with_genres: 16,
+        with_original_language: 'ja',
+        page: page
+      }
+    });
+    res.status(200).send(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 // Define a route that listens for requests to retrieve a specific student record by its record_id
 app.get('/students/:record_id', async function(req, res) {

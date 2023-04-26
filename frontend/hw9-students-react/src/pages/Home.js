@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
-
+import axios from 'axios';
 export default function Home() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+  
   useEffect(() => {
     async function fetchMovies(page) {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=8634de54298be041f009b7c918664433&sort_by=popularity.desc&with_genres=16&with_original_language=ja&page=${page}`
-      );
-      const data = await response.json();
+      const response = await axios.get(`http://localhost:5678/trending?page=${page}`);
+      const { data } = response;
       setMovies(data.results);
       setTotalPages(data.total_pages);
     }
@@ -123,20 +120,23 @@ export default function Home() {
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             {movies.map((movie) => (
               <div className="col" key={movie.id}>
-                <div className="card h-100">
-                  <img
-                    className="card-img-top"
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{movie.title}</h5>
-                    <p className="card-text">{movie.overview.substring(0, 100)}...</p>
-                    <p className="card-text">
-                      <small className="text-muted">{movie.release_date}</small>
-                    </p>
-                  </div>
-                </div>
+                <Link to={`/MovieDetails/${movie.id}`}className="movie-link">
+                    <div className="card h-100">
+                        <img
+                        className="card-img-top"
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        alt={movie.title}
+                        />
+                        <div className="card-body">
+                            <h5 className="card-title">{movie.title}</h5>
+                            <p className="card-text">{movie.overview.substring(0, 100)}...</p>
+                            <p className="card-text">
+                                <small className="text-muted">{movie.release_date}</small>
+                            </p>
+                        </div>
+                    </div>
+                </Link>
+
               </div>
             ))}
           </div>
