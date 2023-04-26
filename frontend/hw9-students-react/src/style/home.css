@@ -1,0 +1,5 @@
+#animecard:hover{
+    transform: scale(1.03);
+    transition: 0.5s;
+    cursor: pointer;
+}
