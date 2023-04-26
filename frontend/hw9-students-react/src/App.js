@@ -66,7 +66,7 @@ function App() {
         <Route path="/LoginRegister" element={<LoginRegister />} />
         <Route path="/Recommended/" element={<Recommended />} />
         <Route path="/Watchlist" element={<Watchlist />} />
-        <Route path="/MovieDetails" element={<MovieDetails />} />
+        <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
         <Route path="/SearchResults/:searchQuery?" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>
