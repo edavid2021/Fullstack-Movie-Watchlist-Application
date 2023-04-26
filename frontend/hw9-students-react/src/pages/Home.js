@@ -145,7 +145,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="section p-3 bg-light">
+      <section className="section p-4 bg-light">
         <div className="container">
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             {movies.map((movie) => (
