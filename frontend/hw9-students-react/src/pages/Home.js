@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
-import '../style/Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home() {
@@ -168,11 +167,11 @@ export default function Home() {
                       {Watchlist.includes(movie.id) ?
                         <button
                           id={movie.id}
-                          variant="outline-primary"
+                          variant="secondary"
                           size="md"
                           onClick={deleteWatchlist}
                           aria-pressed={active}
-                          className={btnClassName}
+                          className="btn btn-secondary"
                         >
                           Unadd
                         </button>
@@ -183,7 +182,7 @@ export default function Home() {
                           size="md"
                           onClick={addWatchlist}
                           aria-pressed={active}
-                          className={btnClassName}
+                          className="btn btn-outline-secondary"
                         >
                           Watchlist
                         </button>
