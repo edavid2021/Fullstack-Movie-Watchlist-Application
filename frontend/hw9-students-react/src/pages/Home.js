@@ -156,9 +156,11 @@ export default function Home() {
                     alt={movie.title}
                   />
                   <div className="card-body">
-                    <h5 className="card-title">{movie.title}</h5>
+                    <Link to={`/MovieDetails?id =${movie.id}`}>
+                      <h5 className="card-title">{movie.title}</h5>
+                    </Link>
                     <p className="card-text">{movie.overview.substring(0, 100)}...</p>
-                    <div class="cfoot d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
                       <p class="card-text">
                         <small class="text-muted">
                           {movie.release_date}
