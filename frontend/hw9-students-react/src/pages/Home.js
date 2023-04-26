@@ -127,12 +127,6 @@ export default function Home() {
   }
 
   const [active, setActive] = useState(false);
-  const [btnClassName, setBtnClassName] = useState('btn-outline-secondary');
-
-  const handleClick = () => {
-    setActive(!active);
-    setBtnClassName(active ? 'btn-outline-secondary' : 'btn-outline-success');
-  };
 
   return (
     <>
