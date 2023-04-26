@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/home.css';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -148,7 +149,7 @@ export default function Home() {
         <div className="container">
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             {movies.map((movie) => (
-              <div className="col" key={movie.id}>
+              <div className="col" key={movie.id} id="animecard">
                 <div className="card h-100">
                   <img
                     className="card-img-top"
