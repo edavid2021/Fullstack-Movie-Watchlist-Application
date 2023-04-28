@@ -67,7 +67,7 @@ function MovieDetails() {
                             <div class="col ">
                                 <button className="btn btn-outline-dark me-2">Back</button>
                             </div>
-                            <div class="col ">
+                            {/* <div class="col ">
                                 {Watchlist.includes(movie.id) ?
                                     <button
                                         id={movie.id}
@@ -90,8 +90,8 @@ function MovieDetails() {
                                     >
                                         Watchlist
                                     </button>
-                                }
-                            </div>
+                                } 
+                            </div> */}
                         </div>
                     </div>
                 </div>
