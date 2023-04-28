@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -16,13 +16,21 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Reset from './pages/Reset';
 import Dashboard from './pages/Dashboard';
-
-
-
-
+import { auth } from './firebase';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, []);
 
   const handleSearch = () => {
     // Your search functionality goes here
@@ -61,12 +69,14 @@ function App() {
               </Link>
             </Form>
 
-
-
-
-
-            <Nav className="me-auto mx-auto">
-            <Nav className="ms-2">
+            {currentUser ? (
+              <Nav className="ms-2">
+                <Nav.Link as={Link} to="/" className="text-white" onClick={() => auth.signOut()}>
+                  Logout
+                </Nav.Link>
+              </Nav>
+            ) : (
+              <Nav className="ms-2">
                 <Nav.Link as={Link} to="/Login" className="text-white">
                   Login
                 </Nav.Link>
@@ -74,10 +84,7 @@ function App() {
                   Register
                 </Nav.Link>
               </Nav>
-            </Nav> 
-
-
-
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
