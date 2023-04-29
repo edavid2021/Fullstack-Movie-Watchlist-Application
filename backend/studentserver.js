@@ -200,7 +200,6 @@ app.get('/trending', async (req, res) => {
   }
 });
 
- //end delete method
  
  app.get('/latest', async (req, res) => {
     const { page } = req.query;
