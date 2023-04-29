@@ -48,6 +48,9 @@
 
 .card:hover {
   background-color: #ededed;
+  transform: scale(1.03);
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 
