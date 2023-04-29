@@ -202,21 +202,22 @@ app.get('/trending', async (req, res) => {
 
  //end delete method
  
-app.get('/latest', async (req, res) => {
-  const { page } = req.query;
-    const { data } = await axios.get(`https://api.themoviedb.org/3/movie/now_playing`, {
-      params: {
-        api_key: '8634de54298be041f009b7c918664433',
-        language: 'en-US',
-        page: page
-      }
-    });
-    res.status(200).send(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+ app.get('/latest', async (req, res) => {
+    const { page } = req.query;
+    try {
+      const { data } = await axios.get(`https://api.themoviedb.org/3/movie/now_playing`, {
+        params: {
+          api_key: '8634de54298be041f009b7c918664433',
+          language: 'en-US',
+          page: page
+        }
+      });
+      res.status(200).send(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  });
 
 app.get('/search', async (req, res) => {
   const { query, page } = req.query;
