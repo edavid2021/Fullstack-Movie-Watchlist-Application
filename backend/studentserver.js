@@ -200,7 +200,6 @@ app.get('/trending', async (req, res) => {
   }
 });
 
- //end delete method
  
  app.get('/latest', async (req, res) => {
     const { page } = req.query;
@@ -219,18 +218,19 @@ app.get('/trending', async (req, res) => {
     }
   });
 
-app.get('/search', async (req, res) => {
-  const { query, page } = req.query;
-
+app.post('/search', async (req, res) => {
+  console.log(req.body.query)
+  var query = req.body.query;
   try {
+    console.log(query);
     const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
       params: {
         api_key: '8634de54298be041f009b7c918664433',
         language: 'en-US',
-        query: query,
-        page: page
+        query: query
       }
     });
+    console.log(data)
     res.status(200).send(data);
   } catch (error) {
     console.error(error);
