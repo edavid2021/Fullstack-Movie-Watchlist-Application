@@ -19,36 +19,32 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-app.delete('/users/:user_id/movie_list/:movie_id', async (req, res) => {
+app.delete('/users/:user_id/movies/:movie_id', async (req, res) => {
   try {
     const client = await MongoClient.connect(uri);
     const db = client.db('myapp');
 
+    const users = db.collection('users');
 
-    if (!user) {
-      client.close();
-      return res.status(404).send({ message: 'User not found' });
-    }
-
-    const movieIndex = user.movie_lists.findIndex(movie => movie.movie_id === req.params.movie_id);
-
-    if (movieIndex === -1) {
-      client.close();
-      return res.status(404).send({ message: 'Movie not found' });
-    }
-
-    user.movie_lists.splice(movieIndex, 1);
-
-    await users.updateOne({ _id: ObjectId(req.params.user_id) }, { $set: { movie_lists: user.movie_lists } });
+    const result = await users.updateOne(
+      { user_id: req.params.user_id },
+      { $pull: { movie_lists: { movie_id: parseInt(req.params.movie_id) } } }
+    );
 
     client.close();
 
-    res.status(200).send({ message: 'Movie deleted successfully' });
+    if (result.modifiedCount > 0) {
+      res.status(200).send({ message: 'Movie deleted successfully' });
+    } else {
+      res.status(404).send({ message: 'Movie not found' });
+    }
   } catch (err) {
     console.error(err);
-    res.status(500).send({ message: 'Error deleting movie from user movie list' });
+    res.status(500).send({ message: 'Error deleting movie' });
   }
 });
+
+
 
 // Get the user's movie list
 app.get('/users/:user_id/movie_list', async (req, res) => {
@@ -57,8 +53,7 @@ app.get('/users/:user_id/movie_list', async (req, res) => {
     const db = client.db('myapp');
 
     const users = db.collection('users');
-
-    const user = await users.findOne({ _id: ObjectId(req.params.user_id) });
+    const user = await users.findOne({user_id: req.params.user_id });
 
     client.close();
 
@@ -161,7 +156,7 @@ app.post('/users/:user_id/movies', async (req, res) => {
     };
 
     const result = await users.updateOne(
-      { _id: ObjectId(req.params.user_id) },
+      { user_id: req.params.user_id },
       { $push: { movie_lists: movie } }
     );
 
@@ -177,6 +172,7 @@ app.post('/users/:user_id/movies', async (req, res) => {
     res.status(500).send({ message: 'Error adding movie' });
   }
 });
+
 
 
 
