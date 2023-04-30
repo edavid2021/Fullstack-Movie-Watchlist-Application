@@ -17,7 +17,6 @@ import Register from './pages/Register';
 import Reset from './pages/Reset';
 import Dashboard from './pages/Dashboard';
 import { auth } from './firebase';
-import WatchlistMovieDetails from './pages/WatchlistMovieDetails';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -102,7 +101,6 @@ function App() {
         <Route path="/Recommended/" element={<Recommended />} />
         <Route path="/Watchlist" element={<Watchlist />} />
         <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
-        <Route path="/WatchlistMovieDetails/:movieID" element={<WatchlistMovieDetails />} />
         <Route path="/SearchResults/:searchQuery?" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>
