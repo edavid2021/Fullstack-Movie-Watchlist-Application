@@ -52,9 +52,13 @@ function App() {
               <Nav.Link as={Link} to="/Latest" className="ps-4">
                 Latest
               </Nav.Link>
+              {currentUser && (
+                <>
               <Nav.Link as={Link} to="/Watchlist" className="ps-4">
                 Watchlist
               </Nav.Link>
+              </>
+              )}
             </Nav>
             <Form className="d-flex justify-content-around" >
               <Form.Control
