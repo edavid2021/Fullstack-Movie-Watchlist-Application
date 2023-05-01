@@ -123,14 +123,14 @@ export default function SearchResults() {
     event.preventDefault();
     var id = parseInt(event.target.id);
     setWatchlist([...Watchlist, id]);
-    console.log(Watchlist);
+    
   }
 
   function deleteWatchlist(event) {
     event.preventDefault();
     var id = parseInt(event.target.id);
     setWatchlist(Watchlist.filter(item => item !== id));
-    console.log(Watchlist);
+    
   }
 
   return (

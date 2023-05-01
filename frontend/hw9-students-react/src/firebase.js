@@ -37,14 +37,15 @@ const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
+    console.log(user.uid);
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     // check if user already exists in MongoDB
-    const response = await axios.get(`/users/${user.uid}`);
-    if (!response.data) {
+    
+    
       // create user in MongoDB
-      await axios.post('http://localhost:5678/users', { user_id: user.uid });
-    }
+      
+  
 
     // upload user data to Firestore
     if (docs.docs.length === 0) {
@@ -54,6 +55,7 @@ const signInWithGoogle = async () => {
         authProvider: "google",
         email: user.email,
       });
+      await axios.post('http://localhost:5678/users', { user_id: user.uid });
     }
 
   } catch (err) {

@@ -147,7 +147,11 @@ export default function Home() {
       alert(data.message);
     })
     .catch(error => console.error(error));
+    
+    // Disable button after click
+    event.target.disabled = true;
   }
+  
   
   function deleteWatchlist(id) {
     fetch(`http://localhost:5678/users/${userId}/movies/${id}`, {

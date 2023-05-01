@@ -11,14 +11,19 @@ function Dashboard() {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
-      const data = doc.docs[0].data();
-      console.log(data);
-      setName(data.name);
+      if (!doc.empty) {
+        const data = doc.docs[0].data();
+        console.log(data);
+        setName(data.name || user?.displayName || user?.email);
+      } else {
+        setName(user?.displayName || user?.email);
+      }
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
+      alert("An error occurred while fetching user data");
     }
   };
+  
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/Login");

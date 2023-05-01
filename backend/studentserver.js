@@ -59,6 +59,8 @@ app.get('/users/:user_id/movies/:movie_id', async (req, res) => {
 
     if (result && result.movie_lists.length > 0) {
       res.status(200).send(result.movie_lists[0]);
+      console.log("success");
+      console.log(req.params.user_id);
     } else {
       res.status(404).send({ message: 'Movie not found' });
     }
@@ -102,8 +104,8 @@ app.put('/users/:user_id/movies/:movie_id', async (req, res) => {
 
     const result = await users.updateOne(
       { 
-        _id: ObjectId(req.params.user_id),
-        "movie_lists.movie_id": req.params.movie_id
+        user_id: req.params.user_id,
+        "movie_lists.movie_id": parseInt(req.params.movie_id)
       },
       { 
         $set: {
@@ -126,6 +128,7 @@ app.put('/users/:user_id/movies/:movie_id', async (req, res) => {
     res.status(500).send({ message: 'Error updating movie' });
   }
 });
+
 
 
 // Add a movie to the user's movie list
@@ -238,25 +241,26 @@ app.get('/trending', async (req, res) => {
     }
   });
 
-app.post('/search', async (req, res) => {
-  console.log(req.body.query)
-  var query = req.body.query;
-  try {
-    console.log(query);
-    const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
-      params: {
-        api_key: '8634de54298be041f009b7c918664433',
-        language: 'en-US',
-        query: query
-      }
-    });
-    console.log(data)
-    res.status(200).send(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+  app.post('/search', async (req, res) => {
+    var query = req.body.query;
+    try {
+      console.log(query);
+      const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
+        params: {
+          api_key: '8634de54298be041f009b7c918664433',
+          language: 'en-US',
+          query: query
+        }
+      });
+      console.log(data)
+      res.status(200).send(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  });
+  
+  
 
 
 app.listen(5678); //start the server

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,11 +12,17 @@ const WatchlistMovieDetails = () => {
   const [writers, setWriters] = useState([]);
   const [user] = useAuthState(auth);
   const [userId, setUserId] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [newRating, setNewRating] = useState(null);
+  const [newComments, setNewComments] = useState(null);
+  const [newWatched, setNewWatched] = useState(null);
+
   useEffect(() => {
     if (user) {
       setUserId(user.uid);
     }
   }, [user]);
+
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
@@ -26,10 +32,9 @@ const WatchlistMovieDetails = () => {
               api_key: '8634de54298be041f009b7c918664433'
             }
           }),
-          axios.get(`/users/${userId}/movies/${movieID}`) // replace "1234" with the actual user ID
+          userId && axios.get(`http://localhost:5678/users/${userId}/movies/${movieID}`) // check if userId is not null
         ]);
-        setMovie({ ...movieResponse.data, ...watchlistResponse.data }); // merge movie data and watchlist data
-
+        setMovie({ ...movieResponse.data, ...watchlistResponse?.data }); // use optional chaining operator to safely access watchlistResponse
         const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}/credits`, {
           params: {
             api_key: '8634de54298be041f009b7c918664433'
@@ -41,9 +46,22 @@ const WatchlistMovieDetails = () => {
         console.error(error);
       }
     };
-
     fetchMovieDetails();
-  }, [movieID]);
+  }, [movieID, userId]);
+
+  const handleEditMovie = async () => {
+    try {
+      const response = await axios.put(`http://localhost:5678/users/${userId}/movies/${movieID}`, {
+        rating: newRating,
+        comments: newComments,
+        watched: newWatched
+      });
+      setMovie({ ...movie, rating: newRating, comments: newComments, watched: newWatched });
+      setShowEditModal(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -60,26 +78,46 @@ const WatchlistMovieDetails = () => {
         <Col md={8}>
           <div className="movie-details">
             <h1>{movie.title}</h1>
-            <div className="genres">{genres}</div>
-            <p>{movie.overview}</p>
-            <div className="row">
-              <div className="col-sm-6">
-                <p>Release date: {movie.release_date}</p>
-                <p>Runtime: {movie.runtime} minutes</p>
-                <p>Rating: {movie.vote_average}/10 ({movie.vote_count} votes)</p>
-              </div>
-              <div className="col-sm-6">
-                <p>Directors: {directors.map((director) => director.name).join(', ')}</p>
-                <p>Writers: {writers.map((writer) => writer.name).join(', ')}</p>
-                <p>Watched: {movie.watched ? 'Yes' : 'No'}</p>
-                <p>Rating: {movie.rating}/5</p>
-              </div>
-            </div>
+            <p><strong>Release date:</strong> {movie.release_date}</p>
+            <p><strong>Genres:</strong> {genres}</p>
+            <p><strong>Overview:</strong> {movie.overview}</p>
+            <p><strong>Directors:</strong> {directors.map((director) => director.name).join(', ')}</p>
+            <p><strong>Writers:</strong> {writers.map((writer) => writer.name).join(', ')}</p>
+            {userId &&
+              <>
+                <p><strong>Rating:</strong> {movie.rating}</p>
+                <p><strong>Comments:</strong> {movie.comments}</p>
+                <p><strong>Watched:</strong> {movie.watched ? 'Yes' : 'No'}</p>
+                <Button onClick={() => setShowEditModal(true)}>Edit</Button>
+              </>
+            }
           </div>
         </Col>
       </Row>
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit movie</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Rating</Form.Label>
+              <Form.Control type="number" value={newRating} onChange={(e) => setNewRating(e.target.value)} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Comments</Form.Label>
+              <Form.Control as="textarea" rows={3} value={newComments} onChange={(e) => setNewComments(e.target.value)} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Check type="checkbox" label="Watched" checked={newWatched} onChange={(e) => setNewWatched(e.target.checked)} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>Cancel</Button>
+          <Button variant="primary" onClick={handleEditMovie}>Save changes</Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
-  );
-};
-
+  );}
 export default WatchlistMovieDetails;
