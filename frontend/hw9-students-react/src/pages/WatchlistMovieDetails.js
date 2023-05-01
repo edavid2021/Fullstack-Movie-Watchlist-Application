@@ -26,10 +26,9 @@ const WatchlistMovieDetails = () => {
               api_key: '8634de54298be041f009b7c918664433'
             }
           }),
-          axios.get(`/users/${userId}/movies/${movieID}`) // replace "1234" with the actual user ID
+          userId && axios.get(`/users/${userId}/movies/${movieID}`) // check if userId is not null
         ]);
-        setMovie({ ...movieResponse.data, ...watchlistResponse.data }); // merge movie data and watchlist data
-
+        setMovie({ ...movieResponse.data, ...watchlistResponse?.data }); // use optional chaining operator to safely access watchlistResponse
         const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}/credits`, {
           params: {
             api_key: '8634de54298be041f009b7c918664433'
@@ -41,9 +40,9 @@ const WatchlistMovieDetails = () => {
         console.error(error);
       }
     };
-
     fetchMovieDetails();
-  }, [movieID]);
+  }, [movieID, userId]);
+  
 
   if (!movie) {
     return <div>Loading...</div>;
