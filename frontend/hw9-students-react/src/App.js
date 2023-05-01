@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Recommended from './pages/Recommended';
 import SearchResults from './pages/SearchResults';
 import Latest from './pages/Latest';
+import Trending from './pages/Trending';
 import Watchlist from './pages/Watchlist';
 import MovieDetails from './pages/MovieDetails';
 import WatchlistMovieDetails from './pages/WatchlistMovieDetails';
@@ -48,6 +49,9 @@ function App() {
             <Nav className="me-auto mx-auto">
               <Nav.Link as={Link} to="/" className="ps-4">
                 Home
+              </Nav.Link>
+              <Nav.Link as={Link} to="/Trending" className="ps-4">
+                Trending
               </Nav.Link>
               <Nav.Link as={Link} to="/Latest" className="ps-4">
                 Latest
@@ -97,7 +101,7 @@ function App() {
         <Route path="/Reset" element={<Reset />} />
         <Route path="/Dashboard" element={<Dashboard />} />
 
-
+        <Route path="/Trending" element={<Trending />} />
         <Route path="/Latest" element={<Latest />} />
         <Route path="/Recommended/" element={<Recommended />} />
         <Route path="/Watchlist" element={<Watchlist />} />
