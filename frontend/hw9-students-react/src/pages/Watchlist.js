@@ -75,7 +75,7 @@ function Watchlist() {
           {movies.map((movie) => {
             return (
               <div className="col d-flex" key={movie.id}>
-                <Link to={`/MovieDetails/${movie.id}`} className="movie-link">
+                <Link to={`/WatchlistMovieDetails/${movie.id}`} className="movie-link">
                   <div className="card h-100">
                     <img
                       className="card-img-top"
