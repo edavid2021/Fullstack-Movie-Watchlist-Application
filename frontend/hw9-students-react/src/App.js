@@ -12,6 +12,7 @@ import SearchResults from './pages/SearchResults';
 import Latest from './pages/Latest';
 import Watchlist from './pages/Watchlist';
 import MovieDetails from './pages/MovieDetails';
+import WatchlistMovieDetails from './pages/WatchlistMovieDetails';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Reset from './pages/Reset';
@@ -101,6 +102,7 @@ function App() {
         <Route path="/Recommended/" element={<Recommended />} />
         <Route path="/Watchlist" element={<Watchlist />} />
         <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
+        <Route path="WatchlistMovieDetails/:movieID" element={<WatchlistMovieDetails />} />
         <Route path="/SearchResults/:searchQuery?" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>

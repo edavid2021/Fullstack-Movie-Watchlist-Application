@@ -43,6 +43,30 @@ app.delete('/users/:user_id/movies/:movie_id', async (req, res) => {
     res.status(500).send({ message: 'Error deleting movie' });
   }
 });
+app.get('/users/:user_id/movies/:movie_id', async (req, res) => {
+  try {
+    const client = await MongoClient.connect(uri);
+    const db = client.db('myapp');
+
+    const users = db.collection('users');
+
+    const result = await users.findOne(
+      { user_id: req.params.user_id, "movie_lists.movie_id": parseInt(req.params.movie_id) },
+      { projection: { "movie_lists.$": 1 } }
+    );
+
+    client.close();
+
+    if (result && result.movie_lists.length > 0) {
+      res.status(200).send(result.movie_lists[0]);
+    } else {
+      res.status(404).send({ message: 'Movie not found' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: 'Error retrieving movie' });
+  }
+});
 
 
 
