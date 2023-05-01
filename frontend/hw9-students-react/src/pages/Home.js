@@ -207,29 +207,34 @@ export default function Home() {
                         {movie.release_date}
                       </small>
                     </p>
-                    {watchlist.some(item => item.movie_id === movie.id) ?
-                      <button
-                      id={movie.id}
-                      variant="secondary"
-                      size="md"
-                      onClick={(event) => { event.preventDefault(); deleteWatchlist(movie.id) }}
-                      aria-pressed={active}
-                      className="btn btn-secondary"
-                      >
-                      Unadd
-                      </button>
-                      :
-                      <button
-                        id={movie.id}
-                        variant="outline-secondary"
-                        size="md"
-                        onClick={(event) => addWatchlist(event)}
-                        aria-pressed={active}
-                        className="btn btn-outline-secondary"
-                      >
-                        Watchlist
-                      </button>
-                    }
+                    {user && (
+                    <>
+                      {watchlist.some(item => item.movie_id === movie.id) ?
+                        <button
+                          id={movie.id}
+                          variant="secondary"
+                          size="md"
+                          onClick={(event) => { event.preventDefault(); deleteWatchlist(movie.id) }}
+                          aria-pressed={active}
+                          className="btn btn-secondary"
+                        >
+                          Unadd
+                        </button>
+                        :
+                        <button
+                          id={movie.id}
+                          variant="outline-secondary"
+                          size="md"
+                          onClick={(event) => addWatchlist(event)}
+                          aria-pressed={active}
+                          className="btn btn-outline-secondary"
+                        >
+                          Watchlist
+                        </button>
+                      }
+                    </>
+                  )}
+
 
                   </div>
                 </div>

@@ -227,11 +227,13 @@ app.get('/trending', async (req, res) => {
  app.get('/latest', async (req, res) => {
     const { page } = req.query;
     try {
-      const { data } = await axios.get(`https://api.themoviedb.org/3/movie/now_playing`, {
+      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
         params: {
           api_key: '8634de54298be041f009b7c918664433',
-          language: 'en-US',
-          page: page
+        sort_by: 'release_date.desc',
+        with_genres: 16,
+        with_original_language: 'ja',
+        page: page
         }
       });
       res.status(200).send(data);
@@ -248,8 +250,10 @@ app.get('/trending', async (req, res) => {
       const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
         params: {
           api_key: '8634de54298be041f009b7c918664433',
-          language: 'en-US',
-          query: query
+          with_genres: 16,
+          with_original_language: 'ja',
+          query: query  
+          
         }
       });
       console.log(data)
