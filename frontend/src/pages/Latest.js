@@ -20,7 +20,7 @@ export default function Latest() {
   useEffect(() => {
     const fetchWatchlist = async () => {
       if (userId) { // only fetch if userId is not null
-        const response = await axios.get(`http://localhost:5678/users/${userId}/movie_list`);
+        const response = await axios.get(`https://movie-app-group20.herokuapp.com/${userId}/movie_list`);
         setWatchlist(response.data);
         console.log(response.data);
       }
@@ -29,7 +29,7 @@ export default function Latest() {
   }, [userId]);
   useEffect(() => {
     async function fetchMovies(page) {
-      const response = await axios.get(`http://localhost:5678/latest?page=${page}`);
+      const response = await axios.get(`https://movie-app-group20.herokuapp.com/latest?page=${page}`);
       const { data } = response;
       setMovies(data.results);
       setTotalPages(data.total_pages);
@@ -133,7 +133,7 @@ export default function Latest() {
       comments: null,
       watched: false
     };
-    fetch(`http://localhost:5678/users/${userId}/movies`, {
+    fetch(`https://movie-app-group20.herokuapp.com/users/${userId}/movies`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -154,7 +154,7 @@ export default function Latest() {
   
   
   function deleteWatchlist(id) {
-    fetch(`http://localhost:5678/users/${userId}/movies/${id}`, {
+    fetch(`https://movie-app-group20.herokuapp.com/users/${userId}/movies/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
