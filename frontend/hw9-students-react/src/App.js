@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -61,9 +61,8 @@ function App() {
                 type="search"
                 placeholder="Search for a Movie"
                 className="me-2 ps-2"
-                value={searchQuery} 
+                value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                // style={{ width: "70%" }} // Set the width here
               />
               <Link to={`/SearchResults/?Film=${searchQuery}`}>
                 <Button variant="outline-success" onClick={handleSearch}>Search</Button>
@@ -105,7 +104,7 @@ function App() {
         <Route path="/WatchlistMovieDetails/:movieID" element={<WatchlistMovieDetails />} />
         <Route path="/SearchResults/:searchQuery?" element={<SearchResults />} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 

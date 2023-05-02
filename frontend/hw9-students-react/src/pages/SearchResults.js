@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+
 
 
 
 export default function SearchResults() {
+  const location = useLocation();
+  const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [active, setActive] = useState(false);
   var [Watchlist, setWatchlist] = useState([]);
   const url = window.location.href;
-  const result = url.slice(42);
+  const result = url.slice(42).replace(/%20/g, " ");
+
+  //replace all the '%20' in the url result with space
+  // const result = url.slice(42).replace(/%20/g, " ");
+
 
   function fetchMovies() {
     var send = {
       query: result
     };
     const backend = 'http://localhost:5678/search';
-    
+
     axios.post(backend, send).then((res) => {
       const { data } = res;
       setMovies(data.results);
@@ -30,7 +38,10 @@ export default function SearchResults() {
 
   useEffect(() => {
     fetchMovies();
-  }, []);
+    const params = new URLSearchParams(location.search);
+    const query = params.get('Film') || '';
+    setSearchQuery(query);
+  }, [location.search]);
 
   function handlePageChange(page) {
     setCurrentPage(page);
