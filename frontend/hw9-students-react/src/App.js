@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Recommended from './pages/Recommended';
 import SearchResults from './pages/SearchResults';
 import Latest from './pages/Latest';
+import Trending from './pages/Trending';
 import Watchlist from './pages/Watchlist';
 import MovieDetails from './pages/MovieDetails';
 import WatchlistMovieDetails from './pages/WatchlistMovieDetails';
@@ -49,27 +50,35 @@ function App() {
               <Nav.Link as={Link} to="/" className="ps-4">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/Latest" className="ps-4">
-                Latest
-              </Nav.Link>
-              <Nav.Link as={Link} to="/Watchlist" className="ps-4">
-                Watchlist
-              </Nav.Link>
+              {currentUser && (
+                <>
+                  <Nav.Link as={Link} to="/Trending" className="ps-4">
+                    Trending
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/Latest" className="ps-4">
+                    Latest
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/Watchlist" className="ps-4">
+                    Watchlist
+                  </Nav.Link>
+                </>
+              )}
             </Nav>
-            <Form className="d-flex justify-content-around" >
-              <Form.Control
-                type="search"
-                placeholder="Search for a Movie"
-                className="me-2 ps-2"
-                value={searchQuery} 
-                onChange={(e) => setSearchQuery(e.target.value)}
-                // style={{ width: "70%" }} // Set the width here
-              />
-              <Link to={`/SearchResults/?Film=${searchQuery}`}>
-                <Button variant="outline-success" onClick={handleSearch}>Search</Button>
-              </Link>
-            </Form>
-
+            {currentUser && (
+              <Form className="d-flex justify-content-around" >
+                <Form.Control
+                  type="search"
+                  placeholder="Search for a Movie"
+                  className="me-2 ps-2"
+                  value={searchQuery} 
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  // style={{ width: "70%" }} // Set the width here
+                />
+                <Link to={`/SearchResults/?Film=${searchQuery}`}>
+                  <Button variant="outline-success" onClick={handleSearch}>Search</Button>
+                </Link>
+              </Form>
+            )}
             {currentUser ? (
               <Nav className="ms-2">
                 <Nav.Link as={Link} to="/" className="text-white" onClick={() => auth.signOut()}>
@@ -91,13 +100,15 @@ function App() {
       </Navbar>
 
       <Routes>
+       
+
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Reset" element={<Reset />} />
         <Route path="/Dashboard" element={<Dashboard />} />
 
-
+        <Route path="/Trending" element={<Trending />} />
         <Route path="/Latest" element={<Latest />} />
         <Route path="/Recommended/" element={<Recommended />} />
         <Route path="/Watchlist" element={<Watchlist />} />
