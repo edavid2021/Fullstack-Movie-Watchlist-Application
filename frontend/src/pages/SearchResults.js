@@ -24,7 +24,7 @@ export default function SearchResults() {
   useEffect(() => {
     const fetchWatchlist = async () => {
       if (userId) { // only fetch if userId is not null
-        const response = await axios.get(`http://localhost:5678/users/${userId}/movie_list`);
+        const response = await axios.get(`https://movie-app-group20.herokuapp.com/users/${userId}/movie_list`);
         setWatchlist(response.data);
         console.log(response.data);
       }
@@ -35,7 +35,7 @@ export default function SearchResults() {
     var send = {
       query: result
     };
-    const backend = 'http://localhost:5678/search';
+    const backend = 'https://movie-app-group20.herokuapp.com/search';
 
     axios.post(backend, send).then((res) => {
       const { data } = res;
@@ -61,7 +61,7 @@ export default function SearchResults() {
       comments: null,
       watched: false
     };
-    fetch(`http://localhost:5678/users/${userId}/movies`, {
+    fetch(`https://movie-app-group20.herokuapp.com/users/${userId}/movies`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ export default function SearchResults() {
   
   
   function deleteWatchlist(id) {
-    fetch(`http://localhost:5678/users/${userId}/movies/${id}`, {
+    fetch(`https://movie-app-group20.herokuapp.com/users/${userId}/movies/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

@@ -32,7 +32,7 @@ const WatchlistMovieDetails = () => {
               api_key: '8634de54298be041f009b7c918664433'
             }
           }),
-          userId && axios.get(`http://localhost:5678/users/${userId}/movies/${movieID}`) // check if userId is not null
+          userId && axios.get(`https://movie-app-group20.herokuapp.com/users/${userId}/movies/${movieID}`) // check if userId is not null
         ]);
         setMovie({ ...movieResponse.data, ...watchlistResponse?.data }); // use optional chaining operator to safely access watchlistResponse
         const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}/credits`, {
@@ -51,7 +51,7 @@ const WatchlistMovieDetails = () => {
 
   const handleEditMovie = async () => {
     try {
-      const response = await axios.put(`http://localhost:5678/users/${userId}/movies/${movieID}`, {
+      const response = await axios.put(`https://movie-app-group20.herokuapp.com/users/${userId}/movies/${movieID}`, {
         rating: newRating,
         comments: newComments,
         watched: newWatched

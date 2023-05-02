@@ -19,7 +19,7 @@ function Watchlist() {
   useEffect(() => {
     async function fetchWatchlist() {
       if (userId) {
-        const response = await axios.get(`http://localhost:5678/users/${userId}/movie_list`);
+        const response = await axios.get(`https://movie-app-group20.herokuapp.com/users/${userId}/movie_list`);
         const watchlist = response.data;
         setWatchlist(watchlist);
       }
@@ -46,7 +46,7 @@ function Watchlist() {
   }, [watchlist]);
 
   function deleteWatchlist(id) {
-    fetch(`http://localhost:5678/users/${userId}/movies/${id}`, {
+    fetch(`https://movie-app-group20.herokuapp.com/users/${userId}/movies/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
