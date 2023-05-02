@@ -29,7 +29,7 @@ export default function Latest() {
   }, [userId]);
   useEffect(() => {
     async function fetchMovies(page) {
-      const response = await axios.get(`https://movie-app-group20.herokuapp.com/latest?page=${page}`);
+      const response = await axios.get(`https://movie-app-group20.herokuapp.com/Latest?page=${page}`);
       const { data } = response;
       setMovies(data.results);
       setTotalPages(data.total_pages);
