@@ -11,6 +11,8 @@ const { MongoClient, ObjectId } = require('mongodb');
 var config = require('./config');
 const apiKey = process.env.API_KEY;
 const mongoUri = process.env.MONGODB_URI;
+const path = require("path");
+
 // Configuring the server
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
