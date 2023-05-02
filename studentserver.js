@@ -379,7 +379,7 @@ app.get('/Trending', async (req, res) => {
    * .then(movies => console.log(movies))
    * .catch(err => console.error(err));
    */
-  app.post('/Search', async (req, res) => {
+  app.post('/SearchResults', async (req, res) => {
     var query = req.body.query;
     try {
       console.log(query);
