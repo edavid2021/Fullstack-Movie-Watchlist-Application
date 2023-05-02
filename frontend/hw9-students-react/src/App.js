@@ -102,7 +102,7 @@ function App() {
 
 
         <Route path="/Latest" element={<Latest />} />
-        <Route path="/Recommended/" element={<Recommended />} />
+        <Route path="/Recommended/:movieID" element={<Recommended />} />
         <Route path="/Watchlist" element={<Watchlist />} />
         <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
         <Route path="WatchlistMovieDetails/:movieID" element={<WatchlistMovieDetails />} />

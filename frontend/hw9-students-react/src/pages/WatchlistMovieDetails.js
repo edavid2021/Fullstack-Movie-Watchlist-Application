@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link  } from 'react-router-dom';
 import { Container, Row, Col, Image, Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { auth } from "../firebase";
@@ -89,6 +89,7 @@ const WatchlistMovieDetails = () => {
                 <p><strong>Comments:</strong> {movie.comments}</p>
                 <p><strong>Watched:</strong> {movie.watched ? 'Yes' : 'No'}</p>
                 <Button onClick={() => setShowEditModal(true)}>Edit</Button>
+                <Button as={Link} to={`/Recommended/${movie.id}`}>Recommended</Button>
               </>
             }
           </div>

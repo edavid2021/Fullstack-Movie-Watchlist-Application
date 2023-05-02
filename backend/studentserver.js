@@ -264,6 +264,22 @@ app.get('/trending', async (req, res) => {
     }
   });
   
+  app.get('/recommendations/:movieId', async (req, res) => {
+    const movieId = req.params.movieId;
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/recommendations`, {
+        params: {
+          api_key: '8634de54298be041f009b7c918664433',
+          language: 'en-US',
+          page: 1
+        }
+      });
+      res.status(200).send(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error fetching recommendations');
+    }
+  });
   
 
 
