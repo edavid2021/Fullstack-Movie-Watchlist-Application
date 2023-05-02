@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 app.delete('/users/:user_id/movies/:movie_id', async (req, res) => {
   try {
-    const client = await MongoClient.connect(uri);
+    const client = await MongoClient.connect(mongoUri);
     const db = client.db('myapp');
 
     const users = db.collection('users');
@@ -47,7 +47,7 @@ app.delete('/users/:user_id/movies/:movie_id', async (req, res) => {
 });
 app.get('/users/:user_id/movies/:movie_id', async (req, res) => {
   try {
-    const client = await MongoClient.connect(uri);
+    const client = await MongoClient.connect(mongoUri);
     const db = client.db('myapp');
 
     const users = db.collection('users');
@@ -77,7 +77,7 @@ app.get('/users/:user_id/movies/:movie_id', async (req, res) => {
 // Get the user's movie list
 app.get('/users/:user_id/movie_list', async (req, res) => {
   try {
-    const client = await MongoClient.connect(uri);
+    const client = await MongoClient.connect(mongoUri);
     const db = client.db('myapp');
 
     const users = db.collection('users');
@@ -99,7 +99,7 @@ app.get('/users/:user_id/movie_list', async (req, res) => {
 // Update a movie in the user's movie list
 app.put('/users/:user_id/movies/:movie_id', async (req, res) => {
   try {
-    const client = await MongoClient.connect(uri);
+    const client = await MongoClient.connect(mongoUri);
     const db = client.db('myapp');
 
     const users = db.collection('users');
@@ -142,7 +142,7 @@ app.put('/users/:user_id/movies/:movie_id', async (req, res) => {
 app.post('/users', async (req, res) => {
   try {
 
-    const client = await MongoClient.connect(uri);
+    const client = await MongoClient.connect(mongoUri);
     const db = client.db('myapp');
     const users = db.collection('users');
 
@@ -172,7 +172,7 @@ app.post('/users', async (req, res) => {
 
 app.post('/users/:user_id/movies', async (req, res) => {
   try {
-    const client = await MongoClient.connect(uri);
+    const client = await MongoClient.connect(mongoUri);
     const db = client.db('myapp');
 
     const users = db.collection('users');
