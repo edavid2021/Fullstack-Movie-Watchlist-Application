@@ -55,7 +55,7 @@ const signInWithGoogle = async () => {
         authProvider: "google",
         email: user.email,
       });
-      await axios.post('http://localhost:5678/users', { user_id: user.uid });
+      await axios.post('https://movie-app-group20.herokuapp.com/users', { user_id: user.uid });
     }
 
   } catch (err) {
@@ -79,7 +79,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     const user = res.user;
 
     // create user in MongoDB
-    await axios.post('http://localhost:5678/users', { user_id: user.uid, name });
+    await axios.post('https://movie-app-group20.herokuapp.com/users', { user_id: user.uid, name });
 
     // upload user data to Firestore
     await addDoc(collection(db, "users"), {
