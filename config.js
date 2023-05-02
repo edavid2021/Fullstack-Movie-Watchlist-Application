@@ -3,7 +3,6 @@ config.app = {};
 config.server = {};
 config.db = {};
 
-config.server.port = 5678;
 
 config.db.host = 'studentdb.4dvz4nf.mongodb.net'
 config.db.port = 80;
