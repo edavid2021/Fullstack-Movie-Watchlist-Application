@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-export default function SearchResults() {
+export default function Search() {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);

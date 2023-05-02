@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Home from './pages/Home';
 import Recommended from './pages/Recommended';
-import SearchResults from './pages/SearchResults';
+import Search from './pages/Search';
 import Latest from './pages/Latest';
 import Trending from './pages/Trending';
 import Watchlist from './pages/Watchlist';
@@ -74,7 +74,7 @@ function App() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   // style={{ width: "70%" }} // Set the width here
                 />
-                <Link to={`/SearchResults/?Film=${searchQuery}`}>
+                <Link to={`/Search/?Film=${searchQuery}`}>
                   <Button variant="outline-success" onClick={handleSearch}>Search</Button>
                 </Link>
               </Form>
@@ -114,7 +114,7 @@ function App() {
         <Route path="/Watchlist" element={<Watchlist />} />
         <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
         <Route path="WatchlistMovieDetails/:movieID" element={<WatchlistMovieDetails />} />
-        <Route path="/SearchResults/:searchQuery?" element={<SearchResults />} />
+        <Route path="/Search/:searchQuery?" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );
