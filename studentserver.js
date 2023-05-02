@@ -312,7 +312,7 @@ app.post('/users/:user_id/movies', async (req, res) => {
  * .then(movies => console.log(movies))
  * .catch(err => console.error(err));
  */
-app.get('/trending', async (req, res) => {
+app.get('/Trending', async (req, res) => {
   const { page } = req.query;
 
   try {
