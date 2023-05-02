@@ -13,8 +13,11 @@ export default function Search() {
   const [watchlist, setWatchlist] = useState([]);
   const [user] = useAuthState(auth);
   const [userId, setUserId] = useState(null);
-  const url = window.location.href;
-  const result = url.slice(42).replace(/%20/g, " ");
+  // const url = window.location.href;
+  // const result = url.slice(42).replace(/%20/g, " ");
+  const url = new URLSearchParams(window.location.search);
+  const result = url.get('Film');
+
 
   useEffect(() => {
     if (user) {
