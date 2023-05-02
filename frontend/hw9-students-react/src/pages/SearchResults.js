@@ -7,9 +7,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function SearchResults() {
   const location = useLocation();
-  const [ setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const [active] = useState(false);
+  const [active, setActive] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
   const [user] = useAuthState(auth);
   const [userId, setUserId] = useState(null);
