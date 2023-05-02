@@ -36,7 +36,7 @@ export default function SearchResults() {
       query: result
     };
     // const backend = 'https://movie-app-group20.herokuapp.com/Search';
-    const backend = '/SearchResults?query=' + query;
+    const backend = '/search';
 
 
     axios.post(backend, send).then((res) => {
