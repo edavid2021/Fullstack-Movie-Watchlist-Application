@@ -346,7 +346,7 @@ app.get('/Trending', async (req, res) => {
   * .then(movies => console.log(movies))
   * .catch(err => console.error(err));
   */
- app.get('/latest', async (req, res) => {
+ app.get('/Latest', async (req, res) => {
     const { page } = req.query;
     try {
       const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
@@ -379,7 +379,7 @@ app.get('/Trending', async (req, res) => {
    * .then(movies => console.log(movies))
    * .catch(err => console.error(err));
    */
-  app.post('/search', async (req, res) => {
+  app.post('/Search', async (req, res) => {
     var query = req.body.query;
     try {
       console.log(query);
