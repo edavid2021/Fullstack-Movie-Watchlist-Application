@@ -1,5 +1,6 @@
 ///studentserver.js
 // Importing the required modules
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -8,7 +9,8 @@ const res = require('express/lib/response')
 // Connection URI for MongoDB
 const { MongoClient, ObjectId } = require('mongodb');
 var config = require('./config');
-const uri = "mongodb+srv://nicholasgiacobbe96:admin@cluster1.1tviz.mongodb.net/?retryWrites=true&w=majority";
+const apiKey = process.env.API_KEY;
+const mongoUri = process.env.MONGODB_URI;
 // Configuring the server
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -209,7 +211,7 @@ app.get('/trending', async (req, res) => {
   try {
     const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
       params: {
-        api_key: '8634de54298be041f009b7c918664433',
+        api_key: apiKey,
         sort_by: 'popularity.desc',
         with_genres: 16,
         with_original_language: 'ja',
@@ -229,7 +231,7 @@ app.get('/trending', async (req, res) => {
     try {
       const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
         params: {
-          api_key: '8634de54298be041f009b7c918664433',
+          api_key: apiKey,
         sort_by: 'release_date.desc',
         with_genres: 16,
         with_original_language: 'ja',
@@ -249,7 +251,7 @@ app.get('/trending', async (req, res) => {
       console.log(query);
       const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
         params: {
-          api_key: '8634de54298be041f009b7c918664433',
+          api_key: apiKey,
           with_genres: 16,
           with_original_language: 'ja',
           query: query  
@@ -267,6 +269,8 @@ app.get('/trending', async (req, res) => {
   
 
 
-app.listen(5678); //start the server
-console.log('Server is running...');
+  port = process.env.PORT || 5678;
+  app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+  });
 
