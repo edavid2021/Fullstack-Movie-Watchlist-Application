@@ -20,7 +20,7 @@ export default function Latest() {
   useEffect(() => {
     const fetchWatchlist = async () => {
       if (userId) { // only fetch if userId is not null
-        const response = await axios.get(`https://movie-app-group20.herokuapp.com/${userId}/movie_list`);
+        const response = await axios.get(`https://movie-app-group20.herokuapp.com/users/${userId}/movie_list`);
         setWatchlist(response.data);
         console.log(response.data);
       }
