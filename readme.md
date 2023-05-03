@@ -1,3 +1,5 @@
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/_EczGbhIXrE/0.jpg)](https://www.youtube.com/watch?v=_EczGbhIXrE "Project Demo Video
+")
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_EczGbhIXrE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=_EczGbhIXrE
