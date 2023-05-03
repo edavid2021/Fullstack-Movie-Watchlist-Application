@@ -1,7 +1,13 @@
 # Setup
 * <span style="font-size: 16pt;"><b>Local Implementation</b></span>
   * In order to run this application on your local machine, you must first clone the main branch or download the files to your VSC. Afterwards, you must have 2 different terminals opened, 1 for backend and another for the frontend.
-    * Backend: make sure you cd into the backend folder ("cd backend") and run the studentserver file ("node studentserver"), you may need to install axios if you do not have it installed (npm install axios).
+    * Backend terminal: make sure you cd into the backend folder ("cd backend") and run the studentserver file ("node studentserver"), you may need to install axios if you do not have it installed ("npm install axios").
+    * Frontend terminal: make sure you cd into the frontend folder ("cd frontend -> cd hw9-students-react") and run the react file ("npm start"), you may need to install react-scripts if you do not have it installed ("npm install react-scripts")
+  * (**NOTE**)  you MUST have npm installed for this NodeJS app
+ 
+* <span style="font-size: 16pt;"><b>Non-Local</b></span>
+  * This app can also be used by going to the heroku deployment link @ 
+https://movie-app-group20.herokuapp.com/
 
 # How To Use
 
