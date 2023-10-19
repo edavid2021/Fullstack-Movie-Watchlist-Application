@@ -14,14 +14,14 @@ const MovieDetails = () => {
       try {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}`, {
           params: {
-            api_key: '8634de54298be041f009b7c918664433'
+            api_key: '390a76f3f6630c9f04cfcffd385d4cfd'
           }
         });
         setMovie(response.data);
 
         const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}/credits`, {
           params: {
-            api_key: '8634de54298be041f009b7c918664433'
+            api_key: '390a76f3f6630c9f04cfcffd385d4cfd'
           }
         });
         setDirectors(creditsResponse.data.crew.filter((crew) => crew.job === 'Director'));

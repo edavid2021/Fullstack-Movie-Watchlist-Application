@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 app.delete('/users/:user_id/movies/:movie_id', async (req, res) => {
   try {
     const client = await MongoClient.connect(mongoUri);
-    const db = client.db('myapp');
+    const db = client.db('WatchlistDatabase');
 
     const users = db.collection('users');
 
@@ -80,7 +80,7 @@ app.delete('/users/:user_id/movies/:movie_id', async (req, res) => {
 app.get('/users/:user_id/movies/:movie_id', async (req, res) => {
   try {
     const client = await MongoClient.connect(mongoUri);
-    const db = client.db('myapp');
+    const db = client.db('WatchlistDatabase');
 
     const users = db.collection('users');
 
@@ -124,10 +124,10 @@ app.get('/users/:user_id/movies/:movie_id', async (req, res) => {
 app.get('/users/:user_id/movie_list', async (req, res) => {
   try {
     const client = await MongoClient.connect(mongoUri);
-    const db = client.db('myapp');
+    const db = client.db('WatchlistDatabase');
 
     const users = db.collection('users');
-    const user = await users.findOne({user_id: req.params.user_id });
+    const user = await users.findOne({ user_id: req.params.user_id });
 
     client.close();
 
@@ -168,16 +168,16 @@ app.get('/users/:user_id/movie_list', async (req, res) => {
 app.put('/users/:user_id/movies/:movie_id', async (req, res) => {
   try {
     const client = await MongoClient.connect(mongoUri);
-    const db = client.db('myapp');
+    const db = client.db('WatchlistDatabase');
 
     const users = db.collection('users');
 
     const result = await users.updateOne(
-      { 
+      {
         user_id: req.params.user_id,
         "movie_lists.movie_id": parseInt(req.params.movie_id)
       },
-      { 
+      {
         $set: {
           "movie_lists.$.rating": req.body.rating,
           "movie_lists.$.comments": req.body.comments,
@@ -218,7 +218,7 @@ app.post('/users', async (req, res) => {
   try {
 
     const client = await MongoClient.connect(mongoUri);
-    const db = client.db('myapp');
+    const db = client.db('WatchlistDatabase');
     const users = db.collection('users');
 
     const existingUser = await users.findOne({ user_id: req.body.user_id });
@@ -265,7 +265,7 @@ app.post('/users', async (req, res) => {
 app.post('/users/:user_id/movies', async (req, res) => {
   try {
     const client = await MongoClient.connect(mongoUri);
-    const db = client.db('myapp');
+    const db = client.db('WatchlistDatabase');
 
     const users = db.collection('users');
 
@@ -330,77 +330,77 @@ app.get('/trending', async (req, res) => {
   }
 });
 
- /**
-  * get the latest movies
-  * @function getLatest
-  * @param {number} page - the page number
-  * 
-  * @returns {object} - the latest movies object
-  * 
-  * @throws {object} - the error object
-  * 
-  * @example
-  * getLatest(1)
-  * .then(movies => console.log(movies))
-  * .catch(err => console.error(err));
-  */
- app.get('/latest', async (req, res) => {
-    const { page } = req.query;
-    try {
-      const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
-        params: {
-          api_key: apiKey,
+/**
+ * get the latest movies
+ * @function getLatest
+ * @param {number} page - the page number
+ * 
+ * @returns {object} - the latest movies object
+ * 
+ * @throws {object} - the error object
+ * 
+ * @example
+ * getLatest(1)
+ * .then(movies => console.log(movies))
+ * .catch(err => console.error(err));
+ */
+app.get('/latest', async (req, res) => {
+  const { page } = req.query;
+  try {
+    const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+      params: {
+        api_key: apiKey,
         sort_by: 'release_date.desc',
         with_genres: 16,
         with_original_language: 'ja',
         page: page
-        }
-      });
-      res.status(200).send(data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Server Error');
-    }
-  });
+      }
+    });
+    res.status(200).send(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
 
-  /**
-   * search for movies
-   * @function search
-   * @param {string} query - the search query
-   * 
-   * @returns {object} - the search results object
-   * 
-   * @throws {object} - the error object
-   * 
-   * @example
-   * search('totoro')
-   * .then(movies => console.log(movies))
-   * .catch(err => console.error(err));
-   */
-  app.post('/search', async (req, res) => {
-    var query = req.body.query;
-    try {
-      console.log(query);
-      const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
-        params: {
-          api_key: apiKey,
-          with_genres: 16,
-          with_original_language: 'ja',
-          query: query  
-          
-        }
-      });
-      console.log(data)
-      res.status(200).send(data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Server Error');
-    }
-  });
-  
-  
-  port = process.env.PORT || 5678;
-  app.listen(port, () => {
+/**
+ * search for movies
+ * @function search
+ * @param {string} query - the search query
+ * 
+ * @returns {object} - the search results object
+ * 
+ * @throws {object} - the error object
+ * 
+ * @example
+ * search('totoro')
+ * .then(movies => console.log(movies))
+ * .catch(err => console.error(err));
+ */
+app.post('/search', async (req, res) => {
+  var query = req.body.query;
+  try {
+    console.log(query);
+    const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
+      params: {
+        api_key: apiKey,
+        with_genres: 16,
+        with_original_language: 'ja',
+        query: query
+
+      }
+    });
+    console.log(data)
+    res.status(200).send(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+port = process.env.PORT || 5678;
+app.listen(port, () => {
   console.log(`Server started on port ${port}`);
-  });
+});
 

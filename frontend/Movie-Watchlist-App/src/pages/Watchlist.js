@@ -66,7 +66,7 @@ function Watchlist() {
     <>
     <section className="section p-3 bg-light border-bottom border-2 border-dark">
       <div className="container d-flex justify-content-between align-items-center">
-        <h3 className="text-center">Your Watchlist:</h3>
+        <h3>Your Watchlist</h3>
       </div>
     </section>
     <section className="section p-3 bg-light">

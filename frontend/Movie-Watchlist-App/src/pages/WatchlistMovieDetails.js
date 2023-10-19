@@ -29,7 +29,7 @@ const WatchlistMovieDetails = () => {
         const [movieResponse, watchlistResponse] = await Promise.all([
           axios.get(`https://api.themoviedb.org/3/movie/${movieID}`, {
             params: {
-              api_key: '8634de54298be041f009b7c918664433'
+              api_key: '390a76f3f6630c9f04cfcffd385d4cfd'
             }
           }),
           userId && axios.get(`http://localhost:5678/users/${userId}/movies/${movieID}`) // check if userId is not null
@@ -37,7 +37,7 @@ const WatchlistMovieDetails = () => {
         setMovie({ ...movieResponse.data, ...watchlistResponse?.data }); // use optional chaining operator to safely access watchlistResponse
         const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}/credits`, {
           params: {
-            api_key: '8634de54298be041f009b7c918664433'
+            api_key: '390a76f3f6630c9f04cfcffd385d4cfd'
           }
         });
         setDirectors(creditsResponse.data.crew.filter((crew) => crew.job === 'Director'));
